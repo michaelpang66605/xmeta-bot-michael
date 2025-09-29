@@ -28,12 +28,12 @@ RECEIVER_EMAIL = "michael.pang2015@gmail.com"
 EMAIL_PASSWORD = "bbzaqfxtpzlqsqsg"
 
 # XMeta API Authentication 
-XMETA_API_KEY = "YOUR_API_KEY_HERE" 
-XMETA_TOKEN = "YOUR_TOKEN_HERE"      
-XMETA_USER_ID = "YOUR_USER_ID"      
+XMETA_API_KEY = "输入API" 
+XMETA_TOKEN = "如果有输入TOKEN"      
+XMETA_USER_ID = "USER_ID"      
 
 # Monte Carlo 
-N_SIMULATIONS = 1000  # Reduced from 5000 for faster loading
+N_SIMULATIONS = 1000  
 FORECAST_HORIZON = 30  # days
 
 # ==========================
@@ -59,7 +59,7 @@ def fetch_price():
         }
         
         # Add authentication if credentials are provided
-        if XMETA_API_KEY != "YOUR_API_KEY_HERE":
+        if XMETA_API_KEY != "输入API":
             headers['Authorization'] = f'Bearer {XMETA_API_KEY}'
             headers['X-API-Key'] = XMETA_API_KEY
             headers['X-Token'] = XMETA_TOKEN
@@ -154,10 +154,8 @@ def build_plot(price_series, forecast):
     return fig
 
 # ==========================
-# NEW: TECHNICAL INDICATORS
+# 主要功能
 # ==========================
-# These functions are additive and do not change your existing functions.
-# They compute common indicators (SMA, EMA, RSI, MACD, Bollinger Bands, ATR)
 
 def compute_moving_averages(price_series, windows=[5, 10, 20, 50, 100]):
     """Return a DataFrame of moving averages for the given windows."""
@@ -218,7 +216,7 @@ def compute_all_technical_indicators(price_series):
     return df_ind
 
 # ==========================
-# NEW: ADVANCED ANALYTICS
+# ADVANCED ANALYTICS
 # ==========================
 def compute_correlation(price_series, other_series):
     """Compute correlation between price_series and other_series (aligned on index)."""
@@ -303,13 +301,13 @@ def scenario_analysis_hook(price_series, shock_pct=-0.1, days=7):
     return pd.Series(scenario, index=future_index)
 
 # ==========================
-# STREAMLIT DASHBOARD (UPDATED WITH NEW FEATURES)
+# 仪表盘 
 # ==========================
 def main():
-    st.title("📈 XMeta Quant Dashboard")
+    st.title("XMeta 仪表盘 - PZM")
     st.markdown("Real-time XMeta price tracking, Monte Carlo simulation, and risk metrics.")
     
-    # Sidebar toggles for new features
+    # Sidebar toggles 
     st.sidebar.header("Extras / Visualizations")
     show_technical = st.sidebar.checkbox("Show Technical Indicators (MA, RSI, MACD, BB)", value=True)
     show_advanced = st.sidebar.checkbox("Show Advanced Analytics (beta, seasonality, regime)", value=False)
@@ -326,9 +324,9 @@ def main():
         st.info("To get real data, you need XMeta API credentials")
         st.code("""
 # Add these to your code:
-XMETA_API_KEY = "your_api_key_here"
-XMETA_TOKEN = "your_token_here"
-XMETA_USER_ID = "your_user_id_here"
+XMETA_API_KEY = "输入API"
+XMETA_TOKEN = "如果有输入TOKEN"
+XMETA_USER_ID = "USER_ID"
         """)
         return
     else:
@@ -366,7 +364,6 @@ XMETA_USER_ID = "your_user_id_here"
             ind = compute_all_technical_indicators(df["price"])
         
         # Add a few indicator traces to the plot: SMA_20, EMA_20 (if present), Bollinger Bands
-        # We won't remove your original traces; these are overlay additions.
         if "SMA_20" in ind.columns:
             fig.add_trace(go.Scatter(x=ind.index, y=ind["SMA_20"], mode="lines", name="SMA 20", line=dict(width=1, dash="dash")))
         if "EMA_20" in ind.columns:
@@ -457,7 +454,7 @@ XMETA_USER_ID = "your_user_id_here"
         if macd_fig:
             st.plotly_chart(macd_fig, use_container_width=True)
 
-    # Price alert (unchanged)
+    # Price alert 
     if price <= ALERT_LOW or price >= ALERT_HIGH:
         send_email_alert(price)
         st.warning("Price crossed alert threshold! Email sent.")
