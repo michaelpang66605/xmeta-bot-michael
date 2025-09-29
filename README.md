@@ -28,9 +28,9 @@ python main.py
 
 2. **添加 XMeta API 凭证**（在 `main.py` 中）：
    ```python
-   XMETA_API_KEY = "your_api_key_here"
-   XMETA_TOKEN = "your_token_here"
-   XMETA_USER_ID = "your_user_id_here"
+   XMETA_API_KEY = "输入API"
+   XMETA_TOKEN = "如果有输入TOKEN"
+   XMETA_USER_ID = "USER_ID"
    ```
 
 3. **运行：**
