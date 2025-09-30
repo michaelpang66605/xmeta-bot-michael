@@ -37,7 +37,7 @@ N_SIMULATIONS = 1000
 FORECAST_HORIZON = 30  # days
 
 # ==========================
-# FUNCTIONS (ORIGINAL)
+# FUNCTIONS 
 # ==========================
 def fetch_price():
     """Fetch latest price from XMeta API with authentication"""
@@ -58,7 +58,6 @@ def fetch_price():
             'Origin': 'https://x-metash.cn'
         }
         
-        # Add authentication if credentials are provided
         if XMETA_API_KEY != "输入API":
             headers['Authorization'] = f'Bearer {XMETA_API_KEY}'
             headers['X-API-Key'] = XMETA_API_KEY
@@ -323,7 +322,7 @@ def main():
         st.warning("The XMeta API is currently down or requires authentication")
         st.info("To get real data, you need XMeta API credentials")
         st.code("""
-# Add these to your code:
+# Add to code:
 XMETA_API_KEY = "输入API"
 XMETA_TOKEN = "如果有输入TOKEN"
 XMETA_USER_ID = "USER_ID"
@@ -358,7 +357,7 @@ XMETA_USER_ID = "USER_ID"
     # Plot chart (original fig)
     fig = build_plot(df["price"], forecast)
 
-    # === Add technical indicators and overlay traces if requested ===
+    # === technical indicators ===
     if show_technical:
         with st.spinner("Computing technical indicators..."):
             ind = compute_all_technical_indicators(df["price"])
@@ -401,7 +400,7 @@ XMETA_USER_ID = "USER_ID"
     # === Advanced analytics ===
     adv_res = {}
     if show_advanced:
-        with st.spinner("Running advanced analytics..."):
+        with st.spinner("Running advanced analytics"):
             # If user supplied benchmark CSV, attempt to compute beta/correlation
             benchmark_series = None
             if benchmark_csv is not None:
@@ -473,7 +472,7 @@ def run_command_line():
     choice = input("Enter your choice (1 or 2): ")
     
     if choice == "1":
-        print("\nStarting Streamlit dashboard...")
+        print("\nStarting Streamlit dashboard")
         print("The app will open in your browser at http://localhost:8501")
         print("Press Ctrl+C to stop the server")
         print()
