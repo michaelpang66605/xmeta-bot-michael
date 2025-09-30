@@ -315,7 +315,7 @@ def main():
     scenario_days = st.sidebar.number_input("Scenario days", min_value=1, max_value=90, value=7)
 
     # Fetch & log live price
-    with st.spinner("Fetching XMeta price..."):
+    with st.spinner("Fetching XMeta price"):
         price = fetch_price()
     if price is None:
         st.error("Failed to fetch current price from XMeta API")
@@ -370,8 +370,6 @@ XMETA_USER_ID = "USER_ID"
         if {"BB_Upper", "BB_Lower"}.issubset(ind.columns):
             fig.add_trace(go.Scatter(x=ind.index, y=ind["BB_Upper"], mode="lines", name="BB Upper", line=dict(width=1, dash="dot")))
             fig.add_trace(go.Scatter(x=ind.index, y=ind["BB_Lower"], mode="lines", name="BB Lower", line=dict(width=1, dash="dot")))
-        # Add RSI & MACD as small separate charts below the main chart using Plotly subplots would be nicer,
-        # but to keep it simple we display them as separate small figures.
         rsi_fig = None
         macd_fig = None
         try:
