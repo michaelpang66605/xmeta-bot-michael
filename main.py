@@ -73,7 +73,7 @@ def fetch_price():
         
         print(f"API Response: {data}")
         
-        # Check if data structure is valid
+        # Validity
         if not data or "data" not in data or not data["data"] or "list" not in data["data"] or not data["data"]["list"]:
             print("Warning: API returned invalid data structure")
             return None
