@@ -25,7 +25,7 @@ SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 465
 SENDER_EMAIL = "michael.pang2015@gmail.com"
 RECEIVER_EMAIL = "michael.pang2015@gmail.com"
-EMAIL_PASSWORD = "bbzaqfxtpzlqsqsg"
+EMAIL_PASSWORD = "enter password"
 
 # XMeta API Authentication 
 XMETA_API_KEY = "输入API" 
