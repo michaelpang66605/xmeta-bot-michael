@@ -23,8 +23,8 @@ ALERT_HIGH = 70.0
 # Email setup
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 465
-SENDER_EMAIL = "michael.pang2015@gmail.com"
-RECEIVER_EMAIL = "michael.pang2015@gmail.com"
+SENDER_EMAIL = "输入邮箱"
+RECEIVER_EMAIL = "输入邮箱"
 EMAIL_PASSWORD = "enter password"
 
 # XMeta API Authentication 
